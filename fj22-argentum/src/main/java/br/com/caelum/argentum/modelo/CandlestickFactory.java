@@ -2,6 +2,7 @@ package br.com.caelum.argentum.modelo;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 public class CandlestickFactory {
@@ -29,16 +30,13 @@ public class CandlestickFactory {
 	}
 
 	public List<Candlestick> constroiCandles(List<Negociacao> todasNegociacoes) {
+		Collections.sort(todasNegociacoes);
+
 		List<Candlestick> candles = new ArrayList<Candlestick>();
 		List<Negociacao> negociacoesDoDia = new ArrayList<Negociacao>();
 
 		Calendar dataAtual = todasNegociacoes.get(0).getData();
 
-		for (Negociacao negociacao : todasNegociacoes) {
-			if (negociacao.getData().before(dataAtual)) {
-				throw new IllegalStateException("Negociações em ordem errada");
-			}
-		}
 		for (Negociacao negociacao : todasNegociacoes) {
 			// se não for mesmo dia, fecha candle e reinicia variáveis
 			if (!negociacao.isMesmoDia(dataAtual)) {
@@ -54,4 +52,5 @@ public class CandlestickFactory {
 		candles.add(candleDoDia);
 		return candles;
 	}
+
 }

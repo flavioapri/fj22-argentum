@@ -71,4 +71,5 @@ public final class Candlestick {
 		return "Abertura " + abertura + ", Fechamento " + fechamento + ", Mínimo " + minimo + ", Máximo " + maximo
 				+ ", Volume " + volume + ", Data " + dataFormatada;
 	}
+
 }
